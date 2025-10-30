@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro'
+import OAuthForm from '../components/OAuthForm.vue'
+---
+
+<Layout title="OAuth Config">
+  <OAuthForm client:load />
+</Layout>
+
+<style>
+  :global(body) {
+    @import '@kong/kongponents/dist/style.css';
+  }
+</style>

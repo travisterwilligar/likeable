@@ -1,0 +1,17 @@
+{
+  "name": "kong-prototype-framework",
+  "version": "1.0.0",
+  "description": "Kong Prototype Framework using Astro + Vue + Kongponents",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/vue": "^4.2.0",
+    "@kong/kongponents": "^9.45.1",
+    "astro": "^4.15.0",
+    "vue": "^3.4.0"
+  }
+}
