@@ -1,225 +1,100 @@
-# Kong Prototype Framework
+# Likeable - Kong Prototype Framework
 
-A prototyping framework using Kong's Kongponents design system with Vue.js 3 and Vite.
+Rapid prototyping with **Astro**, **Vue**, and **Kongponents**.
 
 ## 🚀 Quick Start
 
-**Start the development server:**
+### Run the Dev Server
+
 ```bash
+npm install
 npm run dev
 ```
 
-**Then open**: `http://localhost:8000`
+Server runs on **http://localhost:4321**
 
-## 📁 Project Structure
+### Create a New Page
 
-```
-├── src/
-│   ├── components/     # Reusable Vue components
-│   ├── views/          # Page components (auto-routed)
-│   ├── styles/         # Custom CSS styles
-│   │   └── custom.css  # Global custom styles
-│   ├── router/         # Vue Router configuration
-│   │   └── index.js    # Auto-routing setup
-│   ├── App.vue         # Root Vue component
-│   └── main.js         # Vue app entry point
-├── public/             # Static assets
-├── index.html          # HTML template
-├── vite.config.js      # Vite configuration
-└── package.json        # Dependencies and scripts
+1. Create a file in `likeable/src/pages/MyPage.astro`
+2. Add your content:
+
+```astro
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="My Page">
+  <h1>Hello</h1>
+</Layout>
 ```
 
-## 🎨 Kongponents Reference
+3. Visit `http://localhost:4321/mypage`
 
-The framework includes a comprehensive Kongponents reference page (`/kongponents`) with working examples of all major components:
+### Use Kongponents
 
-- **Buttons** - Primary, secondary, danger, and disabled states
-- **Form Inputs** - Text inputs, selects, textareas
-- **Cards** - Basic cards with headers and content
-- **Badges** - Success, warning, danger, and info variants
-- **Tables** - Data tables with Kongponents styling
-- **Alerts** - Success, warning, danger, and info alerts
-- **Modals** - Interactive modal dialogs with Vue reactivity
-- **Tabs** - Tabbed navigation with Vue state management
-- **Empty States** - Placeholder content for empty views
+```astro
+---
+import Layout from '../layouts/Layout.astro';
+import { KButton, KCard, KInput } from '@kong/kongponents';
+---
 
-Each component example includes:
-- Live preview with Vue interactivity
-- Copy-paste HTML code
-- Vue.js integration examples
+<Layout title="My Prototype">
+  <KCard>
+    <KInput label="Name" placeholder="Enter name" />
+    <KButton>Submit</KButton>
+  </KCard>
+</Layout>
+```
 
-## 🛠️ Adding New Prototypes
+### Add Vue Components
 
-### Creating New Pages
-
-1. **Create a new Vue component** in `/src/views/`:
-   ```vue
-   <!-- /src/views/MyPrototype.vue -->
-   <template>
-     <div class="my-prototype">
-       <h2>My New Prototype</h2>
-       <button class="k-button k-button--primary">Click me</button>
-     </div>
-   </template>
-
-   <script setup>
-   // Vue 3 Composition API
-   </script>
-
-   <style scoped>
-   .my-prototype {
-     padding: 2rem;
-   }
-   </style>
-   ```
-
-2. **Routes are automatically created** - the file `MyPrototype.vue` becomes available at `/myprototype`
-
-3. **Update navigation** in `App.vue` if needed:
-   ```vue
-   <nav class="navbar">
-     <router-link to="/">Home</router-link>
-     <router-link to="/kongponents">Kongponents</router-link>
-     <router-link to="/myprototype">My Prototype</router-link>
-   </nav>
-   ```
-
-### Creating Reusable Components
-
-1. **Create a component** in `/src/components/`:
-   ```vue
-   <!-- /src/components/MyComponent.vue -->
-   <template>
-     <div class="my-component">
-       <h3>{{ title }}</h3>
-       <button class="k-button k-button--primary" @click="handleClick">
-         {{ buttonText }}
-       </button>
-     </div>
-   </template>
-
-   <script setup>
-   defineProps({
-     title: String,
-     buttonText: String
-   })
-
-   const handleClick = () => {
-     console.log('Button clicked!')
-   }
-   </script>
-
-   <style scoped>
-   .my-component {
-     margin: 1rem 0;
-   }
-   </style>
-   ```
-
-2. **Use it in your views**:
-   ```vue
-   <template>
-     <MyComponent title="Hello World" button-text="Click Me" />
-   </template>
-
-   <script setup>
-   import MyComponent from '../components/MyComponent.vue'
-   </script>
-   ```
-
-## �� Using Kongponents
-
-Kongponents are automatically imported and available in all Vue components:
+1. Create `likeable/src/components/MyComponent.vue`:
 
 ```vue
 <template>
-  <!-- Buttons -->
-  <button class="k-button k-button--primary">Primary</button>
-  <button class="k-button k-button--secondary">Secondary</button>
-
-  <!-- Cards -->
-  <div class="k-card">
-    <div class="k-card__body">
-      <h4>Card Title</h4>
-      <p>Card content</p>
-    </div>
+  <div>
+    <p>{{ message }}</p>
+    <button @click="count++">{{ count }}</button>
   </div>
-
-  <!-- Form inputs -->
-  <input type="text" class="k-input" placeholder="Text input">
-  <select class="k-select">
-    <option>Option 1</option>
-  </select>
 </template>
+
+<script setup>
+import { ref } from 'vue';
+const message = ref('Hello');
+const count = ref(0);
+</script>
 ```
 
-## 🚀 Deployment
+2. Use it in a page with `client:load`:
 
-### Development
+```astro
+---
+import MyComponent from '../components/MyComponent.vue';
+---
+
+<Layout title="Page">
+  <MyComponent client:load />
+</Layout>
+```
+
+## 📚 Full Documentation
+
+- **[USAGE.md](./USAGE.md)** - Detailed guide (components, styling, routing)
+- **[AI_PROMPTING_GUIDE.md](./AI_PROMPTING_GUIDE.md)** - Generate prototypes with AI
+- **[QUICK_REFERENCE.md](./QUICK_REFERENCE.md)** - Component snippets
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Deploy to production
+
+## � Commands
+
 ```bash
-npm run dev      # Start development server
+npm run dev      # Start dev server
 npm run build    # Build for production
 npm run preview  # Preview production build
 ```
 
-### Deploy to Vercel
+## 📦 Tech Stack
 
-1. **Push to GitHub**
-2. **Connect to Vercel** - it auto-detects Vite settings
-3. **Deploy automatically** on each push
-
-## ✨ Features
-
-- ✅ **Vue.js 3** - Modern reactive framework
-- ✅ **Vite** - Lightning-fast development and builds
-- ✅ **Kongponents** - Official Kong design system
-- ✅ **Auto-routing** - Routes generated from `/src/views/*.vue` files
-- ✅ **Hot Module Replacement** - Instant updates during development
-- ✅ **Component Library** - Comprehensive Kongponents reference
-- ✅ **Vue Composition API** - Modern Vue.js patterns
-- ✅ **SCSS Support** - Style your components with scoped styles
-
-## 🎯 When to Use
-
-Perfect for:
-- UI/UX prototyping with Vue.js
-- Design system exploration
-- Quick mockups with reactive behavior
-- Component testing and development
-- Stakeholder presentations
-- Kongponents integration testing
-
-## 💡 Tips
-
-- **Auto-routing**: Just create `.vue` files in `/src/views/` - routes are generated automatically
-- **Hot Reload**: Changes appear instantly during development
-- **Component Reference**: Visit `/kongponents` to copy component code
-- **Vue DevTools**: Install browser extension for debugging
-- **Composition API**: Use `<script setup>` for cleaner component code
-
-## 🤝 Workflow
-
-1. **Start development**: `npm run dev`
-2. **Browse components** at `/kongponents`
-3. **Create prototypes** in `/src/views/`
-4. **Extract components** when patterns emerge
-5. **Deploy** to Vercel for sharing
-
-## 🛠️ Troubleshooting
-
-**Issue: Component not found**
-- Kongponents CSS is imported in `main.js`
-- Check component class names match Kongponents documentation
-
-**Issue: Route not working**
-- File must be in `/src/views/` folder
-- File must be a `.vue` file
-- Routes are generated automatically
-
-**Issue: Styles not loading**
-- Kongponents CSS is imported globally
-- Custom styles go in `/src/styles/custom.css`
-
----
-
-Built with ❤️ using Vue.js 3, Vite, and Kong's Kongponents design system
+- **Astro 4.16** - Static site generator with interactive islands
+- **Vue 3** - Reactive components
+- **Kongponents 9.45** - Kong design system
+- **Vite** - Build tool
