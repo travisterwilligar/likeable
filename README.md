@@ -1,54 +1,54 @@
 # Likeable - Kong Prototype Framework
 
-Rapid prototyping with **Astro**, **Vue**, and **Kongponents**.
+Rapid prototyping with **Nuxt**, **Vue**, and **Kongponents**.
 
 ## 🚀 Quick Start
 
 ### Run the Dev Server
 
 ```bash
+cd nuxt-app
 npm install
 npm run dev
 ```
 
-Server runs on **http://localhost:4321**
+Server runs on **http://localhost:3000**
 
 ### Create a New Page
 
-1. Create a file in `likeable/src/pages/MyPage.astro`
+1. Create a file in `nuxt-app/pages/MyPage.vue`
 2. Add your content:
 
-```astro
----
-import Layout from '../layouts/Layout.astro';
----
+```vue
+<template>
+  <div>
+    <h1>Hello</h1>
+  </div>
+</template>
 
-<Layout title="My Page">
-  <h1>Hello</h1>
-</Layout>
+<script setup>
+useHead({
+  title: 'My Page'
+})
+</script>
 ```
 
-3. Visit `http://localhost:4321/mypage`
+3. Visit `http://localhost:3000/mypage`
 
 ### Use Kongponents
 
-```astro
----
-import Layout from '../layouts/Layout.astro';
-import { KButton, KCard, KInput } from '@kong/kongponents';
----
-
-<Layout title="My Prototype">
-  <KCard>
+```vue
+<template>
+  <div>
     <KInput label="Name" placeholder="Enter name" />
     <KButton>Submit</KButton>
-  </KCard>
-</Layout>
+  </div>
+</template>
 ```
 
 ### Add Vue Components
 
-1. Create `likeable/src/components/MyComponent.vue`:
+1. Create `nuxt-app/components/MyComponent.vue`:
 
 ```vue
 <template>
@@ -59,22 +59,19 @@ import { KButton, KCard, KInput } from '@kong/kongponents';
 </template>
 
 <script setup>
-import { ref } from 'vue';
-const message = ref('Hello');
-const count = ref(0);
+const message = ref('Hello')
+const count = ref(0)
 </script>
 ```
 
-2. Use it in a page with `client:load`:
+2. Use it in any page (auto-imported):
 
-```astro
----
-import MyComponent from '../components/MyComponent.vue';
----
-
-<Layout title="Page">
-  <MyComponent client:load />
-</Layout>
+```vue
+<template>
+  <div>
+    <MyComponent />
+  </div>
+</template>
 ```
 
 ## 📚 Full Documentation
@@ -84,9 +81,10 @@ import MyComponent from '../components/MyComponent.vue';
 - **[QUICK_REFERENCE.md](./QUICK_REFERENCE.md)** - Component snippets
 - **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Deploy to production
 
-## � Commands
+## 🛠 Commands
 
 ```bash
+cd nuxt-app
 npm run dev      # Start dev server
 npm run build    # Build for production
 npm run preview  # Preview production build
@@ -94,7 +92,7 @@ npm run preview  # Preview production build
 
 ## 📦 Tech Stack
 
-- **Astro 4.16** - Static site generator with interactive islands
+- **Nuxt 4.2** - Full-stack Vue framework
 - **Vue 3** - Reactive components
-- **Kongponents 9.45** - Kong design system
+- **Kongponents 9.46** - Kong design system (from GitHub repo)
 - **Vite** - Build tool
